@@ -14,7 +14,7 @@ class OptionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
+      width: 150,
       child: FlatButton(
           color: COLOR_DARK_BLUE,
           splashColor: Colors.white.withAlpha(55),
