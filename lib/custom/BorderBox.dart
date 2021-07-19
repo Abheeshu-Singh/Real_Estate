@@ -6,13 +6,11 @@ class BorderBox extends StatelessWidget {
   final EdgeInsets padding;
   final double width, height;
 
-  const BorderBox(
-      {Key? key,
-      required this.child,
+  BorderBox(
+      {required this.child,
       required this.height,
       required this.padding,
-      required this.width})
-      : super(key: key);
+      required this.width});
 
   @override
   Widget build(BuildContext context) {

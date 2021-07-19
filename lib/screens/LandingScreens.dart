@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate/custom/BorderBox.dart';
 import 'package:real_estate/custom/OptionButton.dart';
+import 'package:real_estate/screens/DetailPage.dart';
 import 'package:real_estate/utils/constants.dart';
 import 'package:real_estate/utils/custom_functions.dart';
 import 'package:real_estate/utils/sample_data.dart';
@@ -33,8 +34,8 @@ class LandingScreen extends StatelessWidget {
                         children: [
                           BorderBox(
                             height: 50.0,
-                            width: 50,
                             padding: EdgeInsets.all(5),
+                            width: 50,
                             child: Icon(
                               Icons.menu,
                               color: COLOR_BLACK,
@@ -146,51 +147,59 @@ class RealEstateItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              ClipRRect(
-                  borderRadius: BorderRadius.circular(25.0),
-                  child: Image.asset(itemData["image"])),
-              Positioned(
-                top: 15,
-                right: 15,
-                child: BorderBox(
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: COLOR_BLACK,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailPage(
+                  itemData: itemData,
+                )));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(25.0),
+                    child: Image.asset(itemData["image"])),
+                Positioned(
+                  top: 15,
+                  right: 15,
+                  child: BorderBox(
+                    child: Icon(
+                      Icons.favorite_border,
+                      color: COLOR_BLACK,
+                    ),
+                    height: 50,
+                    width: 50,
+                    padding: EdgeInsets.all(4),
                   ),
-                  height: 50,
-                  width: 50,
-                  padding: EdgeInsets.all(4),
                 ),
-              ),
-            ],
-          ),
-          addVerticalSpace(15),
-          Row(
-            children: [
-              Text(
-                "${formatCurrency(itemData["amount"])}",
-                style: themeData.textTheme.headline1,
-              ),
-              addHorizontalSpace(10),
-              Text(
-                "${itemData["address"]}",
-                style: themeData.textTheme.bodyText2,
-              )
-            ],
-          ),
-          addVerticalSpace(10),
-          Text(
-            "${itemData["bedrooms"]} bedrooms / ${itemData["bathrooms"]} bathrooms / ${itemData["area"]} sqft",
-            style: themeData.textTheme.headline5,
-          )
-        ],
+              ],
+            ),
+            addVerticalSpace(15),
+            Row(
+              children: [
+                Text(
+                  "${formatCurrency(itemData["amount"])}",
+                  style: themeData.textTheme.headline1,
+                ),
+                addHorizontalSpace(10),
+                Text(
+                  "${itemData["address"]}",
+                  style: themeData.textTheme.bodyText2,
+                )
+              ],
+            ),
+            addVerticalSpace(10),
+            Text(
+              "${itemData["bedrooms"]} bedrooms / ${itemData["bathrooms"]} bathrooms / ${itemData["area"]} sqft",
+              style: themeData.textTheme.headline5,
+            )
+          ],
+        ),
       ),
     );
   }
